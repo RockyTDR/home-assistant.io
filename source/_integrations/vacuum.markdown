@@ -30,7 +30,17 @@ A vacuum {% term entity %} can have the following states:
 
 ## Actions
 
-Available actions: `start`, `pause`, `stop`, `return_to_base`, `locate`, `clean_spot`, `clean_area`, `set_fan_speed`, and `send_command`.
+Available actions:
+
+- `start`
+- `pause`
+- `stop`
+- `return_to_base`
+- `locate`
+- `clean_spot`
+- `clean_area`
+- `set_fan_speed`
+- `send_command`.
 
 Before calling one of these actions, make sure your vacuum platform supports it.
 
@@ -38,101 +48,104 @@ Before calling one of these actions, make sure your vacuum platform supports it.
 
 The `vacuum.start` action starts or resumes a cleaning task.
 
-| Data attribute | Optional | Description                                                      |
-| ---------------------- | -------- | ---------------------------------------------------------------- |
-| `entity_id`            | yes      | Only act on specific vacuum. Use `entity_id: all` to target all. |
+| Data attribute | Optional | Description |
+| -------------- | -------- | ----------- |
+| `entity_id`    | yes      | Only act on specific vacuum. Use `entity_id: all` to target all. |
 
 ### Action: Pause
 
 The `vacuum.pause` action pauses a cleaning task.
 
-| Data attribute | Optional | Description                                                      |
-| ---------------------- | -------- | ---------------------------------------------------------------- |
-| `entity_id`            | yes      | Only act on specific vacuum. Use `entity_id: all` to target all. |
+| Data attribute | Optional | Description |
+| -------------- | -------- | ----------- |
+| `entity_id`    | yes      | Only act on specific vacuum. Use `entity_id: all` to target all. |
 
 ### Action: Stop
 
 The `vacuum.stop` action stops the current activity of the vacuum.
 
-| Data attribute | Optional | Description                                                      |
-| ---------------------- | -------- | ---------------------------------------------------------------- |
-| `entity_id`            | yes      | Only act on specific vacuum. Use `entity_id: all` to target all. |
+| Data attribute | Optional | Description |
+| -------------- | -------- | ----------- |
+| `entity_id`    | yes      | Only act on specific vacuum. Use `entity_id: all` to target all. |
 
 ### Action: Return to base
 
 The `vacuum.return_to_base` action tells the vacuum to return home.
 
-| Data attribute | Optional | Description                                                      |
-| ---------------------- | -------- | ---------------------------------------------------------------- |
-| `entity_id`            | yes      | Only act on specific vacuum. Use `entity_id: all` to target all. |
+| Data attribute | Optional | Description |
+| -------------- | -------- | ----------- |
+| `entity_id`    | yes      | Only act on specific vacuum. Use `entity_id: all` to target all. |
 
 ### Action: Locate
 
 The `vacuum.locate` action locates the vacuum cleaner robot.
 
-| Data attribute | Optional | Description                                                      |
-| ---------------------- | -------- | ---------------------------------------------------------------- |
-| `entity_id`            | yes      | Only act on specific vacuum. Use `entity_id: all` to target all. |
+| Data attribute | Optional | Description |
+| -------------- | -------- | ----------- |
+| `entity_id`    | yes      | Only act on specific vacuum. Use `entity_id: all` to target all. |
 
 ### Action: Clean spot
 
 The `vacuum.clean_spot` action tells the vacuum cleaner to do a spot clean-up.
 
-| Data attribute | Optional | Description                                                      |
-| ---------------------- | -------- | ---------------------------------------------------------------- |
-| `entity_id`            | yes      | Only act on specific vacuum. Use `entity_id: all` to target all. |
+| Data attribute | Optional | Description |
+| -------------- | -------- | ----------- |
+| `entity_id`    | yes      | Only act on specific vacuum. Use `entity_id: all` to target all. |
 
 ### Action: Clean area
 
 The `vacuum.clean_area` action tells the vacuum to clean one or more Home Assistant areas. To use this action, the vacuum's segments must first be mapped to areas.
 
-| Data attribute | Optional | Description                                                      |
-| ---------------------- | -------- | ---------------------------------------------------------------- |
-| `entity_id`            | yes      | Only act on specific vacuum. Use `entity_id: all` to target all. |
-| `cleaning_area_id`     | no       | List of areas for the vacuum to clean.                           |
+| Data attribute     | Optional | Description |
+| ------------------ | -------- | ----------- |
+| `entity_id`        | yes      | Only act on specific vacuum. Use `entity_id: all` to target all. |
+| `cleaning_area_id` | no       | List of areas for the vacuum to clean. |
 
 ### Action: Set fan speed
 
 The `vacuum.set_fan_speed` action sets the fan speed of the vacuum. The `fanspeed` can be a label, as `balanced` or `turbo`, or be a number; it depends on the `vacuum` platform.
 
-| Data attribute | Optional | Description                                                                                                        |
-| ---------------------- | -------- | ------------------------------------------------------------------------------------------------------------------ |
-| `entity_id`            | yes      | Only act on specific vacuum. Use `entity_id: all` to target all.                                                   |
-| `fan_speed`            | no       | Platform dependent vacuum cleaner fan speed, with speed steps, like 'medium', or by percentage, between 0 and 100. |
+| Data attribute | Optional | Description |
+| -------------- | -------- | ----------- |
+| `entity_id`    | yes      | Only act on specific vacuum. Use `entity_id: all` to target all. |
+| `fan_speed`    | no       | Platform dependent vacuum cleaner fan speed, with speed steps, like 'medium', or by percentage, between 0 and 100. |
 
 ### Action: Send command
 
 The `vacuum.send_command` action sends a platform-specific command to the vacuum cleaner.
 
-| Data attribute | Optional | Description                                                      |
-| ---------------------- | -------- | ---------------------------------------------------------------- |
-| `entity_id`            | yes      | Only act on specific vacuum. Use `entity_id: all` to target all. |
-| `command`              | no       | Command to execute.                                              |
-| `params`               | yes      | Parameters for the command.                                      |
+| Data attribute | Optional | Description |
+| -------------- | -------- | ----------- |
+| `entity_id`    | yes      | Only act on specific vacuum. Use `entity_id: all` to target all. |
+| `command`      | no       | Command to execute. |
+| `params`       | yes      | Parameters for the command. |
 
 ## Triggers
 
-The vacuum {% term integration %} provides purpose-specific [automation triggers](/docs/automation/trigger/#entity-triggers). These are available when the **Purpose-specific triggers and conditions** feature in {% my labs title="**Settings** > **System** > **Labs**" %} is enabled.
+{% include integrations/labs_entity_triggers_note.md %}
 
-These triggers only fire when the entity transitions from a known, valid state. If a device goes offline and reconnects (transitioning from `unavailable` or `unknown` back to an active state), the trigger does not fire for that recovery.
+The vacuum {% term integration %} provides purpose-specific [automation triggers](/docs/automation/trigger/#entity-triggers).
 
-### Creating a vacuum trigger
+These triggers only fire when the entity transitions from a known, valid state.
+If a device goes offline and reconnects (transitioning from `unavailable` or `unknown` back to an active state), the trigger does not execute for that recovery.
+
+### Example: Creating a vacuum trigger
 
 This example creates an automation that sends a notification when both your downstairs and upstairs vacuums have finished cleaning and docked.
 
 1. Go to {% my automations title="**Settings** > **Automations & scenes**" %} and select **Create automation**.
 2. Select **Create new automation**.
-3. Select **Add trigger**, then in the **Search trigger** field, type "vacuum returned".
-4. Select **Vacuum returned to dock** from the list.
+3. Select **Add trigger**, then in the **Search trigger** field, enter `vacuum returned`.
+4. From the list, select **Vacuum returned to dock**.
 5. Under **Target**, select the entities you want to monitor:
-   - You can select specific entities, such as **vacuum.downstairs** and **vacuum.upstairs**.
-   - You can also select an area or a floor, and all vacuum entities in that area or floor are targeted.
+   - To monitor specific entities, select **vacuum.downstairs** and **vacuum.upstairs**.
+   - To monitor all vacuum entities in an area or a floor, select the area or floor.
 6. Under **Options**, set **Behavior**.
-   - If you select **Last**, for example, the automation only fires after both vacuums have docked.
+   - For example, if you select **Last**, the automation only fires after both vacuums have docked.
 7. In the **Then do** section, select **Add action** and choose your preferred notification action.
 8. Select **Save** and give your automation a meaningful name.
 
-The equivalent YAML for this automation looks like this:
+{% details "Expand YAML for this automation" %}
 
 ```yaml
 automation:
@@ -149,6 +162,8 @@ automation:
       data:
         message: "Both vacuums have finished cleaning and docked."
 ```
+
+{% enddetails %}
 
 ### Trigger: Vacuum returned to dock
 
